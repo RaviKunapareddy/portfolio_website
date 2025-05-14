@@ -277,7 +277,7 @@ const Skills = () => {
             <div className="text-center mb-10">
               <h3 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white inline-block relative">
                 My Approach to AI Development
-                <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-blue-500"></div>
+                <div className="absolute -bottom-3 left-0 right-0 mx-auto w-20 h-1 bg-gradient-to-r from-primary-500 to-blue-600"></div>
               </h3>
               <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
                 I believe in building AI systems that are not just powerful, but also explainable, ethical, and aligned with human values. My work focuses on creating solutions that:
