@@ -73,7 +73,7 @@ const About = () => {
                     </div>
                   </div>
                   <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Northern Illinois University</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Master's in Management Information Systems | 2021-2023</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Master's in Management Information Systems | 2023-2025</p>
                   <p className="text-sm">Specialized in AI systems, data analytics, and business intelligence</p>
                 </div>
                 
@@ -84,7 +84,7 @@ const About = () => {
                     </div>
                   </div>
                   <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200">TCS</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Software Engineer | 2019-2021</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Software Engineer | 2020-2022</p>
                   <p className="text-sm">Developed enterprise solutions and gained foundational software engineering experience</p>
                 </div>
                 
