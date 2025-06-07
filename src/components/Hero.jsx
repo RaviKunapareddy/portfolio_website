@@ -31,8 +31,8 @@ const Hero = () => {
   // Download resume function
   const downloadResume = () => {
     const link = document.createElement('a')
-    link.href = '/portfolio_website/resume.pdf'
-    link.download = 'Raviteja_Kunapareddy_Resume.pdf'
+    link.href = '/portfolio_website/Ravi_Kunapareddy_resume.pdf'
+    link.download = 'Ravi_Kunapareddy_resume.pdf'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)

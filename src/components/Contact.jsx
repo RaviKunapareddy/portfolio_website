@@ -139,7 +139,7 @@ const Contact = () => {
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Quick Actions</p>
               <div className="flex gap-4">
                 <a 
-                  href="/portfolio_website/resume.pdf"
+                  href="/portfolio_website/Ravi_Kunapareddy_resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium"
