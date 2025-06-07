@@ -88,23 +88,24 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col sm:flex-row justify-center gap-4 mb-8"
           >
-            <a 
-              href="#projects"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="btn-primary px-6 py-3 font-medium flex items-center justify-center gap-2"
+            <Link
+              to="projects"
+              spy={true}
+              smooth={true}
+              offset={SCROLL_OFFSET}
+              duration={500}
+              className="btn-primary px-6 py-3 font-medium flex items-center justify-center gap-2 cursor-pointer"
             >
               View Projects
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-            </a>
+            </Link>
             
             <a 
-              href="./assets/Raviteja_Kunapareddy_Resume.pdf" 
-              download
+              href="/resume.pdf" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-outline px-6 py-3 font-medium flex items-center justify-center gap-2"
             >
               <FaDownload className="w-4 h-4" />
@@ -119,10 +120,10 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex justify-center gap-6"
           >
-            <a href="https://linkedin.com/in/ravikunapareddy" className="text-gray-500 hover:text-primary-600 transition-colors">
+            <a href="https://linkedin.com/in/ravikunapareddy" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary-600 transition-colors">
               <FaLinkedin className="w-6 h-6" />
             </a>
-            <a href="https://github.com/RaviKunapareddy" className="text-gray-500 hover:text-primary-600 transition-colors">
+            <a href="https://github.com/RaviKunapareddy" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary-600 transition-colors">
               <FaGithub className="w-6 h-6" />
             </a>
             <a href="mailto:ravikunapareddy@example.com" className="text-gray-500 hover:text-primary-600 transition-colors">
