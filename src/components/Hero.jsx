@@ -1,23 +1,22 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-scroll'
 import { FaArrowDown } from 'react-icons/fa'
+import { HERO_KEYWORDS, SCROLL_OFFSET } from '../utils/constants'
 
 const Hero = () => {
-  const keywords = ["Semantic AI", "GenAI Systems", "Multi-Agent Architectures", "Explainable ML", "AI Safety"]
   const [currentKeyword, setCurrentKeyword] = useState(0)
-  const canvasRef = useRef(null)
   
   // No canvas animation - we'll use a GIF instead
   
   // Keyword rotation effect
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentKeyword((prev) => (prev + 1) % keywords.length)
+      setCurrentKeyword((prev) => (prev + 1) % HERO_KEYWORDS.length)
     }, 3000) // Increased from 2000ms to 3000ms for better readability
     
     return () => clearInterval(interval)
-  }, [keywords.length])
+  }, [])
   
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
@@ -68,14 +67,14 @@ const Hero = () => {
           <div className="h-12 mb-6 flex justify-center items-center">
             <AnimatePresence mode="wait">
               <motion.p
-                key={keywords[currentKeyword]}
+                key={HERO_KEYWORDS[currentKeyword]}
                 className="text-xl md:text-2xl text-primary-500 font-medium"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
               >
-                {keywords[currentKeyword]}
+                {HERO_KEYWORDS[currentKeyword]}
               </motion.p>
             </AnimatePresence>
           </div>
@@ -124,7 +123,7 @@ const Hero = () => {
               to="about"
               spy={true}
               smooth={true}
-              offset={-70}
+              offset={SCROLL_OFFSET}
               duration={500}
               className="flex flex-col items-center text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 cursor-pointer transition-colors"
             >

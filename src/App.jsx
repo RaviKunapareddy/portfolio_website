@@ -8,24 +8,15 @@ import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import useTheme from './hooks/useTheme'
+import { NAV_LINKS, APP_CONFIG } from './utils/constants'
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false)
+  const { darkMode, toggleTheme } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
 
   useEffect(() => {
-    // Check for user preference
-    if (localStorage.theme === 'dark' || 
-        (!('theme' in localStorage) && 
-        window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setDarkMode(true)
-      document.documentElement.classList.add('dark')
-    } else {
-      setDarkMode(false)
-      document.documentElement.classList.remove('dark')
-    }
-
     // Scroll progress handler
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight
@@ -37,25 +28,6 @@ function App() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-    if (darkMode) {
-      document.documentElement.classList.remove('dark')
-      localStorage.theme = 'light'
-    } else {
-      document.documentElement.classList.add('dark')
-      localStorage.theme = 'dark'
-    }
-  }
-
-  const navLinks = [
-    { name: 'Hero', to: 'hero' },
-    { name: 'About', to: 'about' },
-    { name: 'Projects', to: 'projects' },
-    { name: 'Skills', to: 'skills' },
-    { name: 'Contact', to: 'contact' }
-  ]
 
   return (
     <div className="min-h-screen relative">
@@ -74,12 +46,12 @@ function App() {
             transition={{ duration: 0.5 }}
             className="text-xl font-heading font-bold text-primary-600"
           >
-            Raviteja Kunapareddy
+            {APP_CONFIG.AUTHOR}
           </motion.div>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
@@ -93,7 +65,7 @@ function App() {
               </Link>
             ))}
             <button 
-              onClick={toggleDarkMode}
+              onClick={toggleTheme}
               className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
               aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
@@ -104,7 +76,7 @@ function App() {
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
             <button 
-              onClick={toggleDarkMode}
+              onClick={toggleTheme}
               className="p-2 mr-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
               aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
@@ -140,7 +112,7 @@ function App() {
               </button>
             </div>
             <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
+              {NAV_LINKS.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
