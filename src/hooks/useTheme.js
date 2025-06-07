@@ -7,18 +7,18 @@ import { useState, useEffect } from 'react'
 const useTheme = () => {
   const [darkMode, setDarkMode] = useState(true)
 
-  // Initialize theme from localStorage or default to dark
+  // Force dark mode initialization
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    const isDark = savedTheme === 'light' ? false : true // Default to dark unless explicitly set to light
+    // Always force dark mode
+    const isDark = true
     
     setDarkMode(isDark)
     updateDocumentClass(isDark)
     
-    // Store the theme if not already stored
-    if (!savedTheme) {
-      localStorage.setItem('theme', 'dark')
-    }
+    // Force dark in localStorage
+    localStorage.setItem('theme', 'dark')
+    
+    console.log('Theme hook: Dark mode forced to true')
   }, [])
 
   const updateDocumentClass = (isDark) => {

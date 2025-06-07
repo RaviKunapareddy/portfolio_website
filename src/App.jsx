@@ -27,6 +27,11 @@ function App() {
   }
 
   useEffect(() => {
+    // Force dark mode as additional safety
+    document.documentElement.classList.add('dark')
+    document.documentElement.classList.remove('light')
+    console.log('App.jsx: Dark class forced')
+    
     // Scroll progress handler
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight
