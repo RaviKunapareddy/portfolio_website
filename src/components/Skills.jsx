@@ -133,37 +133,112 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Key Specializations */}
+        {/* Core Specializations - Enhanced Visibility */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12"
+          className="mt-16"
         >
-          <h3 className="text-xl font-bold mb-6 text-gray-800 dark:text-white text-center">Core Specializations</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800 dark:text-white">Core Specializations</h3>
+            <div className="w-16 h-1 bg-gradient-to-r from-primary-500 to-purple-600 mx-auto mb-4"></div>
+            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+              Advanced expertise areas where I deliver exceptional results
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: "Multi-Agent Systems", desc: "CrewAI, LangGraph" },
-              { name: "RAG Implementation", desc: "Vector DBs, Embeddings" },
-              { name: "Explainable AI", desc: "SHAP, LIME, Interpretability" },
-              { name: "Semantic Search", desc: "Vector Search, Retrieval" },
-              { name: "MLOps & Deployment", desc: "Model Serving, Monitoring" },
-              { name: "Natural Language Processing", desc: "LLMs, Text Analysis" },
-              { name: "Computer Vision", desc: "CNNs, Image Processing" },
-              { name: "Data Engineering", desc: "ETL, Pipelines, APIs" }
+              { 
+                name: "Multi-Agent Systems", 
+                desc: "CrewAI, LangGraph",
+                icon: "🤖",
+                gradient: "from-purple-500 to-indigo-600",
+                bgGradient: "from-purple-50 to-indigo-50 dark:from-purple-900/30 dark:to-indigo-900/30"
+              },
+              { 
+                name: "RAG Implementation", 
+                desc: "Vector DBs, Embeddings",
+                icon: "🔍", 
+                gradient: "from-blue-500 to-cyan-600",
+                bgGradient: "from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/30"
+              },
+              { 
+                name: "Explainable AI", 
+                desc: "SHAP, LIME, Interpretability",
+                icon: "💡",
+                gradient: "from-green-500 to-emerald-600",
+                bgGradient: "from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30"
+              },
+              { 
+                name: "Semantic Search", 
+                desc: "Vector Search, Retrieval",
+                icon: "🎯",
+                gradient: "from-orange-500 to-red-600",
+                bgGradient: "from-orange-50 to-red-50 dark:from-orange-900/30 dark:to-red-900/30"
+              },
+              { 
+                name: "MLOps & Deployment", 
+                desc: "Model Serving, Monitoring",
+                icon: "⚙️",
+                gradient: "from-teal-500 to-green-600",
+                bgGradient: "from-teal-50 to-green-50 dark:from-teal-900/30 dark:to-green-900/30"
+              },
+              { 
+                name: "Natural Language Processing", 
+                desc: "LLMs, Text Analysis",
+                icon: "📝",
+                gradient: "from-pink-500 to-rose-600",
+                bgGradient: "from-pink-50 to-rose-50 dark:from-pink-900/30 dark:to-rose-900/30"
+              },
+              { 
+                name: "Computer Vision", 
+                desc: "CNNs, Image Processing",
+                icon: "👁️",
+                gradient: "from-violet-500 to-purple-600",
+                bgGradient: "from-violet-50 to-purple-50 dark:from-violet-900/30 dark:to-purple-900/30"
+              },
+              { 
+                name: "Data Engineering", 
+                desc: "ETL, Pipelines, APIs",
+                icon: "🔧",
+                gradient: "from-amber-500 to-orange-600",
+                bgGradient: "from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30"
+              }
             ].map((specialization, index) => (
               <motion.div
                 key={index}
-                whileHover={{ scale: 1.02, y: -2 }}
-                className="bg-gradient-to-br from-primary-50 to-blue-50 dark:from-primary-900/20 dark:to-blue-900/20 p-4 rounded-lg border border-primary-200 dark:border-primary-800"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  y: -8,
+                  transition: { duration: 0.2 }
+                }}
+                className={`bg-gradient-to-br ${specialization.bgGradient} p-6 rounded-xl shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700 relative overflow-hidden group cursor-pointer`}
               >
-                <h4 className="font-semibold text-primary-700 dark:text-primary-300 text-sm mb-1">
+                {/* Decorative gradient overlay */}
+                <div className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${specialization.gradient} opacity-10 rounded-bl-3xl`}></div>
+                
+                {/* Icon */}
+                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-200">
+                  {specialization.icon}
+                </div>
+                
+                {/* Content */}
+                <h4 className="font-bold text-gray-800 dark:text-white text-lg mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                   {specialization.name}
                 </h4>
-                <p className="text-xs text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                   {specialization.desc}
                 </p>
+                
+                {/* Bottom accent line */}
+                <div className={`absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r ${specialization.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300`}></div>
               </motion.div>
             ))}
           </div>
