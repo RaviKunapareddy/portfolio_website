@@ -40,8 +40,6 @@ const Hero = () => {
   
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
-      {/* Clean background with subtle pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
       
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto text-center">
