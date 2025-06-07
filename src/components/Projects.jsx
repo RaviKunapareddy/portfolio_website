@@ -27,7 +27,7 @@ const Projects = () => {
   const displayedProjects = showMore ? nonFeaturedProjects : nonFeaturedProjects.slice(0, 6)
   
   return (
-    <section id="projects" className="section bg-gray-50 dark:bg-gray-800">
+    <section id="projects" className="section bg-gray-50 dark:bg-slate-800/30 neural-bg">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

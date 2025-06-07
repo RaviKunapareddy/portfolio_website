@@ -5,13 +5,12 @@ import { useState, useEffect } from 'react'
  * @returns {Object} Theme state and controls
  */
 const useTheme = () => {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(true)
 
-  // Initialize theme from localStorage or system preference
+  // Initialize theme from localStorage or default to dark
   useEffect(() => {
     const isDark = localStorage.theme === 'dark' || 
-      (!('theme' in localStorage) && 
-       window.matchMedia('(prefers-color-scheme: dark)').matches)
+      (!('theme' in localStorage) && true) // Default to dark theme
     
     setDarkMode(isDark)
     updateDocumentClass(isDark)
