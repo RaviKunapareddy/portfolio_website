@@ -20,8 +20,11 @@ const Projects = () => {
     modal.open(project)
   }
   
-  // Show only top 6 projects initially
-  const displayedProjects = showMore ? regularProjects : regularProjects.slice(0, 6)
+  // Filter out featured projects from regular projects to avoid duplicates
+  const nonFeaturedProjects = regularProjects.filter(project => !project.featured)
+  
+  // Show only top 6 non-featured projects initially
+  const displayedProjects = showMore ? nonFeaturedProjects : nonFeaturedProjects.slice(0, 6)
   
   return (
     <section id="projects" className="section bg-gray-50 dark:bg-gray-800">
@@ -86,47 +89,49 @@ const Projects = () => {
         </div>
         
         {/* More Projects Grid */}
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">More Projects</h3>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setShowMore(!showMore)}
-              className="px-4 py-2 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-lg font-medium hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors"
-            >
-              {showMore ? 'Show Less' : `View All ${regularProjects.length}`}
-            </motion.button>
+        {nonFeaturedProjects.length > 0 && (
+          <div className="mb-12">
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">More Projects</h3>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowMore(!showMore)}
+                className="px-4 py-2 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-lg font-medium hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors"
+              >
+                {showMore ? 'Show Less' : `View All ${nonFeaturedProjects.length}`}
+              </motion.button>
+            </div>
+            
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={`${filter}-${showMore}`}
+                variants={ANIMATION_VARIANTS.CONTAINER}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              >
+                {displayedProjects.map(project => (
+                  <motion.div
+                    key={project.id}
+                    variants={ANIMATION_VARIANTS.ITEM}
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden border border-gray-100 dark:border-gray-600"
+                  >
+                    <ProjectCard
+                      project={project}
+                      featured={false}
+                      onCardClick={handleProjectClick}
+                      onDetailsClick={handleProjectClick}
+                      compact={true}
+                    />
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
-          
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={`${filter}-${showMore}`}
-              variants={ANIMATION_VARIANTS.CONTAINER}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {displayedProjects.map(project => (
-                <motion.div
-                  key={project.id}
-                  variants={ANIMATION_VARIANTS.ITEM}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden border border-gray-100 dark:border-gray-600"
-                >
-                  <ProjectCard
-                    project={project}
-                    featured={false}
-                    onCardClick={handleProjectClick}
-                    onDetailsClick={handleProjectClick}
-                    compact={true}
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+        )}
         
         {/* Tech Stack Summary */}
         <motion.div

@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion'
 import { 
   FaPython, FaReact, FaAws, FaDocker, FaGitAlt, FaDatabase,
-  FaBrain, FaRobot, FaChartLine, FaCode
+  FaBrain, FaRobot, FaChartLine, FaCode, FaServer, FaCog
 } from 'react-icons/fa'
 import { 
   SiTensorflow, SiPytorch, SiMongodb, SiPostgresql, 
-  SiRedis, SiKubernetes, SiJupyter, SiStreamlit
+  SiRedis, SiKubernetes, SiJupyter, SiStreamlit, SiPandas,
+  SiNumpy, SiScikitlearn, SiOpenai, SiFastapi
 } from 'react-icons/si'
 
 const Skills = () => {
@@ -15,32 +16,38 @@ const Skills = () => {
       icon: FaBrain,
       color: "bg-purple-500",
       skills: [
-        { name: "TensorFlow", icon: SiTensorflow, level: 90 },
-        { name: "PyTorch", icon: SiPytorch, level: 85 },
         { name: "LangChain", icon: FaCode, level: 95 },
-        { name: "CrewAI", icon: FaRobot, level: 90 }
+        { name: "CrewAI", icon: FaRobot, level: 90 },
+        { name: "TensorFlow", icon: SiTensorflow, level: 85 },
+        { name: "PyTorch", icon: SiPytorch, level: 80 },
+        { name: "Scikit-learn", icon: SiScikitlearn, level: 90 },
+        { name: "OpenAI API", icon: SiOpenai, level: 95 }
       ]
     },
     {
-      title: "Programming",
+      title: "Programming & Tools",
       icon: FaCode,
       color: "bg-blue-500",
       skills: [
         { name: "Python", icon: FaPython, level: 95 },
         { name: "JavaScript", icon: FaReact, level: 80 },
         { name: "SQL", icon: FaDatabase, level: 85 },
-        { name: "Git", icon: FaGitAlt, level: 90 }
+        { name: "Git", icon: FaGitAlt, level: 90 },
+        { name: "FastAPI", icon: SiFastapi, level: 90 },
+        { name: "Jupyter", icon: SiJupyter, level: 95 }
       ]
     },
     {
-      title: "Data & Analytics",
+      title: "Data Science & Analytics",
       icon: FaChartLine,
       color: "bg-green-500",
       skills: [
+        { name: "Pandas", icon: SiPandas, level: 95 },
+        { name: "NumPy", icon: SiNumpy, level: 90 },
         { name: "MongoDB", icon: SiMongodb, level: 85 },
         { name: "PostgreSQL", icon: SiPostgresql, level: 80 },
-        { name: "Redis", icon: SiRedis, level: 75 },
-        { name: "Jupyter", icon: SiJupyter, level: 90 }
+        { name: "Vector DBs", icon: FaDatabase, level: 90 },
+        { name: "Redis", icon: SiRedis, level: 75 }
       ]
     },
     {
@@ -50,8 +57,10 @@ const Skills = () => {
       skills: [
         { name: "AWS", icon: FaAws, level: 80 },
         { name: "Docker", icon: FaDocker, level: 85 },
+        { name: "Streamlit", icon: SiStreamlit, level: 90 },
         { name: "Kubernetes", icon: SiKubernetes, level: 70 },
-        { name: "Streamlit", icon: SiStreamlit, level: 90 }
+        { name: "MLOps", icon: FaCog, level: 80 },
+        { name: "CI/CD", icon: FaServer, level: 75 }
       ]
     }
   ]
@@ -69,7 +78,7 @@ const Skills = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-2">Technical Skills</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary-500 to-blue-600 mx-auto mb-6"></div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Core technologies and frameworks I use to build production-ready AI systems
+            Comprehensive toolkit for building production-ready AI systems and scalable applications
           </p>
         </motion.div>
 
@@ -130,21 +139,32 @@ const Skills = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 text-center"
+          className="mt-12"
         >
-          <h3 className="text-xl font-bold mb-6 text-gray-800 dark:text-white">Core Specializations</h3>
-          <div className="flex flex-wrap justify-center gap-3">
+          <h3 className="text-xl font-bold mb-6 text-gray-800 dark:text-white text-center">Core Specializations</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              "Multi-Agent Systems", "RAG Implementation", "Explainable AI", 
-              "Vector Databases", "MLOps", "Semantic Search", "NLP", "Computer Vision"
+              { name: "Multi-Agent Systems", desc: "CrewAI, LangGraph" },
+              { name: "RAG Implementation", desc: "Vector DBs, Embeddings" },
+              { name: "Explainable AI", desc: "SHAP, LIME, Interpretability" },
+              { name: "Semantic Search", desc: "Vector Search, Retrieval" },
+              { name: "MLOps & Deployment", desc: "Model Serving, Monitoring" },
+              { name: "Natural Language Processing", desc: "LLMs, Text Analysis" },
+              { name: "Computer Vision", desc: "CNNs, Image Processing" },
+              { name: "Data Engineering", desc: "ETL, Pipelines, APIs" }
             ].map((specialization, index) => (
-              <motion.span
+              <motion.div
                 key={index}
-                whileHover={{ scale: 1.05 }}
-                className="px-4 py-2 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-semibold"
+                whileHover={{ scale: 1.02, y: -2 }}
+                className="bg-gradient-to-br from-primary-50 to-blue-50 dark:from-primary-900/20 dark:to-blue-900/20 p-4 rounded-lg border border-primary-200 dark:border-primary-800"
               >
-                {specialization}
-              </motion.span>
+                <h4 className="font-semibold text-primary-700 dark:text-primary-300 text-sm mb-1">
+                  {specialization.name}
+                </h4>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  {specialization.desc}
+                </p>
+              </motion.div>
             ))}
           </div>
         </motion.div>

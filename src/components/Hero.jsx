@@ -18,6 +18,17 @@ const Hero = () => {
     return () => clearInterval(interval)
   }, [])
   
+  // Backup scroll function if Link doesn't work
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById('projects')
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+  
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
       {/* Clean background with subtle pattern */}
@@ -88,19 +99,15 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col sm:flex-row justify-center gap-4 mb-8"
           >
-            <Link
-              to="projects"
-              spy={true}
-              smooth={true}
-              offset={SCROLL_OFFSET}
-              duration={500}
-              className="btn-primary px-6 py-3 font-medium flex items-center justify-center gap-2 cursor-pointer"
+            <button
+              onClick={scrollToProjects}
+              className="btn-primary px-6 py-3 font-medium flex items-center justify-center gap-2 cursor-pointer border-none"
             >
               View Projects
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-            </Link>
+            </button>
             
             <a 
               href="/resume.pdf" 
@@ -138,18 +145,14 @@ const Hero = () => {
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
-          <Link
-            to="projects"
-            spy={true}
-            smooth={true}
-            offset={SCROLL_OFFSET}
-            duration={500}
-            className="text-gray-400 hover:text-primary-500 cursor-pointer transition-colors"
+          <button
+            onClick={scrollToProjects}
+            className="text-gray-400 hover:text-primary-500 cursor-pointer transition-colors border-none bg-transparent"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
-          </Link>
+          </button>
         </motion.div>
       </div>
     </section>
