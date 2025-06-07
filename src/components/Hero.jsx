@@ -31,7 +31,7 @@ const Hero = () => {
   // Download resume function
   const downloadResume = () => {
     const link = document.createElement('a')
-    link.href = '/resume.pdf'
+    link.href = '/portfolio_website/resume.pdf'
     link.download = 'Raviteja_Kunapareddy_Resume.pdf'
     document.body.appendChild(link)
     link.click()
@@ -132,7 +132,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex justify-center gap-6"
           >
-            <a href="https://linkedin.com/in/ravikunapareddy" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary-600 transition-colors">
+            <a href="https://www.linkedin.com/in/ravi-kunapareddy/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary-600 transition-colors">
               <FaLinkedin className="w-6 h-6" />
             </a>
             <a href="https://github.com/RaviKunapareddy" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary-600 transition-colors">

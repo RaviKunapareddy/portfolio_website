@@ -117,7 +117,7 @@ const Footer = () => {
                 San Francisco Bay Area, California
               </p>
               <a 
-                href="./assets/Raviteja_Kunapareddy_Resume.pdf" 
+                href="/portfolio_website/resume.pdf" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-block mt-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-blue-600 text-white rounded-lg hover:from-primary-700 hover:to-blue-700 transition-colors"
