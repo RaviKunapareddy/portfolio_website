@@ -9,11 +9,16 @@ const useTheme = () => {
 
   // Initialize theme from localStorage or default to dark
   useEffect(() => {
-    const isDark = localStorage.theme === 'dark' || 
-      (!('theme' in localStorage) && true) // Default to dark theme
+    const savedTheme = localStorage.getItem('theme')
+    const isDark = savedTheme === 'light' ? false : true // Default to dark unless explicitly set to light
     
     setDarkMode(isDark)
     updateDocumentClass(isDark)
+    
+    // Store the theme if not already stored
+    if (!savedTheme) {
+      localStorage.setItem('theme', 'dark')
+    }
   }, [])
 
   const updateDocumentClass = (isDark) => {
@@ -29,7 +34,7 @@ const useTheme = () => {
     setDarkMode(newDarkMode)
     
     // Update localStorage
-    localStorage.theme = newDarkMode ? 'dark' : 'light'
+    localStorage.setItem('theme', newDarkMode ? 'dark' : 'light')
     
     // Update document class
     updateDocumentClass(newDarkMode)
@@ -37,7 +42,7 @@ const useTheme = () => {
 
   const setTheme = (isDark) => {
     setDarkMode(isDark)
-    localStorage.theme = isDark ? 'dark' : 'light'
+    localStorage.setItem('theme', isDark ? 'dark' : 'light')
     updateDocumentClass(isDark)
   }
 

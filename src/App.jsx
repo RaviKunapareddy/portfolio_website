@@ -11,7 +11,7 @@ import useTheme from './hooks/useTheme'
 import { NAV_LINKS, APP_CONFIG } from './utils/constants'
 
 function App() {
-  const { isDark, toggleTheme } = useTheme()
+  const { darkMode, toggleTheme } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
 
@@ -41,8 +41,8 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div className={isDark ? 'dark' : ''}>
-        <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+      <div className={darkMode ? 'dark' : ''}>
+        <div className="min-h-screen bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 transition-colors duration-300">
           {/* Scroll Progress Bar */}
           <div 
             className="fixed top-0 left-0 h-1 bg-primary-600 z-50"
@@ -69,10 +69,10 @@ function App() {
                 
                 <button
                   onClick={toggleTheme}
-                  className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                  className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
                   aria-label="Toggle theme"
                 >
-                  {isDark ? '☀️' : '🌙'}
+                  {darkMode ? '☀️' : '🌙'}
                 </button>
               </div>
             </div>
