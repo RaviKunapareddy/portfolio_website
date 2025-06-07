@@ -1,24 +1,21 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link } from 'react-scroll'
 import { FaLinkedin, FaGithub, FaEnvelope, FaDownload } from 'react-icons/fa'
-import { HERO_KEYWORDS, SCROLL_OFFSET } from '../utils/constants'
+import { HERO_KEYWORDS } from '../utils/constants'
 
 const Hero = () => {
   const [currentKeyword, setCurrentKeyword] = useState(0)
-  
-  // No canvas animation - we'll use a GIF instead
   
   // Keyword rotation effect
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentKeyword((prev) => (prev + 1) % HERO_KEYWORDS.length)
-    }, 3000) // Increased from 2000ms to 3000ms for better readability
+    }, 3000)
     
     return () => clearInterval(interval)
   }, [])
   
-  // Backup scroll function if Link doesn't work
+  // Scroll function for View Projects button
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects')
     if (projectsSection) {
@@ -26,7 +23,19 @@ const Hero = () => {
         behavior: 'smooth',
         block: 'start'
       })
+    } else {
+      console.warn('Projects section not found')
     }
+  }
+
+  // Download resume function
+  const downloadResume = () => {
+    const link = document.createElement('a')
+    link.href = '/resume.pdf'
+    link.download = 'Raviteja_Kunapareddy_Resume.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   }
   
   return (
@@ -101,7 +110,7 @@ const Hero = () => {
           >
             <button
               onClick={scrollToProjects}
-              className="btn-primary px-6 py-3 font-medium flex items-center justify-center gap-2 cursor-pointer border-none"
+              className="btn-primary px-6 py-3 font-medium flex items-center justify-center gap-2 cursor-pointer border-none bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all duration-200 hover:shadow-lg"
             >
               View Projects
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,15 +118,13 @@ const Hero = () => {
               </svg>
             </button>
             
-            <a 
-              href="/resume.pdf" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline px-6 py-3 font-medium flex items-center justify-center gap-2"
+            <button 
+              onClick={downloadResume}
+              className="btn-outline px-6 py-3 font-medium flex items-center justify-center gap-2 border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-600 hover:text-white transition-all duration-200"
             >
               <FaDownload className="w-4 h-4" />
               Download Resume
-            </a>
+            </button>
           </motion.div>
           
           {/* Social links */}

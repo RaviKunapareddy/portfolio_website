@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-scroll'
 import { FaMoon, FaSun, FaBars, FaTimes, FaGithub, FaLinkedin } from 'react-icons/fa'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
@@ -15,6 +14,17 @@ function App() {
   const { isDark, toggleTheme } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
+
+  // Smooth scroll function for navigation links
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
 
   useEffect(() => {
     // Scroll progress handler
@@ -43,15 +53,18 @@ function App() {
           <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
             <div className="container mx-auto px-4 py-4">
               <div className="flex items-center justify-between">
-                <div className="font-bold text-xl text-primary-600 dark:text-primary-400">
+                <button 
+                  onClick={() => scrollToSection('hero')}
+                  className="font-bold text-xl text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors cursor-pointer border-none bg-transparent"
+                >
                   Raviteja K.
-                </div>
+                </button>
                 
                 <div className="hidden md:flex items-center space-x-8">
-                  <a href="#hero" className="nav-link">Home</a>
-                  <a href="#projects" className="nav-link">Projects</a>
-                  <a href="#skills" className="nav-link">Skills</a>
-                  <a href="#contact" className="nav-link">Contact</a>
+                  <button onClick={() => scrollToSection('hero')} className="nav-link cursor-pointer border-none bg-transparent">Home</button>
+                  <button onClick={() => scrollToSection('projects')} className="nav-link cursor-pointer border-none bg-transparent">Projects</button>
+                  <button onClick={() => scrollToSection('skills')} className="nav-link cursor-pointer border-none bg-transparent">Skills</button>
+                  <button onClick={() => scrollToSection('contact')} className="nav-link cursor-pointer border-none bg-transparent">Contact</button>
                 </div>
                 
                 <button
