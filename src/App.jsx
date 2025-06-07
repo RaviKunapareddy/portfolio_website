@@ -6,12 +6,13 @@ import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ThemeSelector from './components/ui/ThemeSelector'
 import { ErrorBoundary } from './components/ui'
 import useTheme from './hooks/useTheme'
 import { NAV_LINKS, APP_CONFIG } from './utils/constants'
 
 function App() {
-  const { darkMode, toggleTheme } = useTheme()
+  const { darkMode, currentTheme, changeTheme, toggleTheme } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
 
@@ -46,7 +47,7 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div className={darkMode ? 'dark' : ''}>
+      <div className="dark">
         <div className="min-h-screen bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 transition-colors duration-300">
           {/* Scroll Progress Bar */}
           <div 
@@ -72,13 +73,16 @@ function App() {
                   <button onClick={() => scrollToSection('contact')} className="nav-link cursor-pointer border-none bg-transparent">Contact</button>
                 </div>
                 
-                <button
-                  onClick={toggleTheme}
-                  className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
-                  aria-label="Toggle theme"
-                >
-                  {darkMode ? '☀️' : '🌙'}
-                </button>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={toggleTheme}
+                    className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+                    aria-label="Cycle through themes"
+                    title={`Current: ${currentTheme}`}
+                  >
+                    🎨
+                  </button>
+                </div>
               </div>
             </div>
           </nav>
@@ -91,6 +95,12 @@ function App() {
           </main>
           
           <Footer />
+          
+          {/* Theme Selector */}
+          <ThemeSelector 
+            currentTheme={currentTheme}
+            onThemeChange={changeTheme}
+          />
         </div>
       </div>
     </ErrorBoundary>

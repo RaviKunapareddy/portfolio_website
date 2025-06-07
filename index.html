@@ -65,17 +65,21 @@
       }(window.location))
     </script>
     
-    <!-- Immediate Dark Mode Script -->
+    <!-- Immediate Dark Mode & Theme Script -->
     <script>
-      // Force dark mode immediately and aggressively
+      // Force dark mode and set default theme immediately
       (function() {
-        // Clear any previous theme
-        localStorage.removeItem('theme');
+        // Set default theme if none exists
+        const savedTheme = localStorage.getItem('currentTheme') || 'slate';
         localStorage.setItem('theme', 'dark');
+        localStorage.setItem('currentTheme', savedTheme);
         
         // Force dark class on html element
         document.documentElement.classList.add('dark');
         document.documentElement.classList.remove('light');
+        
+        // Add theme class
+        document.documentElement.classList.add('theme-' + savedTheme);
         
         // Also set it on body for extra measure
         document.body.classList.add('dark');
@@ -86,7 +90,7 @@
         document.body.style.backgroundColor = '#0f172a';
         document.body.style.color = '#f1f5f9';
         
-        console.log('Dark mode forced on HTML load');
+        console.log('Dark mode and ' + savedTheme + ' theme forced on HTML load');
       })();
     </script>
 </head>
