@@ -66,7 +66,7 @@ const Skills = () => {
   ]
 
   return (
-    <section id="skills" className="section dark:bg-slate-800/20 gradient-bg">
+    <section id="skills" className="section">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -90,7 +90,7 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-              className="bg-white dark:bg-slate-800/80 glass-card rounded-lg shadow-lg p-6 border border-gray-100 dark:border-slate-700/50 glow-effect"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-100 dark:border-gray-700"
             >
               {/* Category Header */}
               <div className="flex items-center mb-4">

@@ -6,13 +6,12 @@ import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import ThemeSelector from './components/ui/ThemeSelector'
 import { ErrorBoundary } from './components/ui'
 import useTheme from './hooks/useTheme'
 import { NAV_LINKS, APP_CONFIG } from './utils/constants'
 
 function App() {
-  const { darkMode, currentTheme, changeTheme, toggleTheme } = useTheme()
+  const { isDark, toggleTheme } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
 
@@ -28,11 +27,6 @@ function App() {
   }
 
   useEffect(() => {
-    // Force dark mode as additional safety
-    document.documentElement.classList.add('dark')
-    document.documentElement.classList.remove('light')
-    console.log('App.jsx: Dark class forced')
-    
     // Scroll progress handler
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight
@@ -47,8 +41,8 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div className="dark">
-        <div className="min-h-screen bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 transition-colors duration-300">
+      <div className={isDark ? 'dark' : ''}>
+        <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
           {/* Scroll Progress Bar */}
           <div 
             className="fixed top-0 left-0 h-1 bg-primary-600 z-50"
@@ -56,7 +50,7 @@ function App() {
           />
           
           {/* Navigation */}
-          <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/90 glass-card backdrop-blur-md border-b border-gray-200 dark:border-slate-700/50">
+          <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
             <div className="container mx-auto px-4 py-4">
               <div className="flex items-center justify-between">
                 <button 
@@ -73,16 +67,13 @@ function App() {
                   <button onClick={() => scrollToSection('contact')} className="nav-link cursor-pointer border-none bg-transparent">Contact</button>
                 </div>
                 
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={toggleTheme}
-                    className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
-                    aria-label="Cycle through themes"
-                    title={`Current: ${currentTheme}`}
-                  >
-                    🎨
-                  </button>
-                </div>
+                <button
+                  onClick={toggleTheme}
+                  className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                  aria-label="Toggle theme"
+                >
+                  {isDark ? '☀️' : '🌙'}
+                </button>
               </div>
             </div>
           </nav>
@@ -95,12 +86,6 @@ function App() {
           </main>
           
           <Footer />
-          
-          {/* Theme Selector */}
-          <ThemeSelector 
-            currentTheme={currentTheme}
-            onThemeChange={changeTheme}
-          />
         </div>
       </div>
     </ErrorBoundary>

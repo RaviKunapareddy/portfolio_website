@@ -1,61 +1,52 @@
 import { useState, useEffect } from 'react'
 
 /**
- * Custom hook for managing multiple professional dark themes
+ * Custom hook for managing dark/light theme
  * @returns {Object} Theme state and controls
  */
 const useTheme = () => {
-  const [currentTheme, setCurrentTheme] = useState('slate')
-  const [darkMode] = useState(true) // Always dark mode
+  const [darkMode, setDarkMode] = useState(false)
 
-  // Force dark mode initialization with default theme
+  // Initialize theme from localStorage or system preference
   useEffect(() => {
-    const savedTheme = localStorage.getItem('currentTheme') || 'slate'
+    const isDark = localStorage.theme === 'dark' || 
+      (!('theme' in localStorage) && 
+       window.matchMedia('(prefers-color-scheme: dark)').matches)
     
-    setCurrentTheme(savedTheme)
-    updateThemeClass(savedTheme)
-    
-    // Force dark in localStorage
-    localStorage.setItem('theme', 'dark')
-    localStorage.setItem('currentTheme', savedTheme)
-    
-    console.log(`Theme hook: Set to ${savedTheme} theme`)
+    setDarkMode(isDark)
+    updateDocumentClass(isDark)
   }, [])
 
-  const updateThemeClass = (themeName) => {
-    // Always ensure dark class is present
-    document.documentElement.classList.add('dark')
-    document.documentElement.classList.remove('light')
-    
-    // Remove all theme classes first
-    const themeClasses = ['theme-slate', 'theme-neural', 'theme-cyber', 'theme-matrix', 'theme-midnight', 'theme-gradient']
-    themeClasses.forEach(cls => document.documentElement.classList.remove(cls))
-    
-    // Add the selected theme class
-    document.documentElement.classList.add(`theme-${themeName}`)
-  }
-
-  const changeTheme = (themeName) => {
-    setCurrentTheme(themeName)
-    localStorage.setItem('currentTheme', themeName)
-    updateThemeClass(themeName)
-    console.log(`Theme changed to: ${themeName}`)
+  const updateDocumentClass = (isDark) => {
+    if (isDark) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
   }
 
   const toggleTheme = () => {
-    // Cycle through themes instead of light/dark
-    const themes = ['slate', 'neural', 'cyber', 'matrix', 'midnight', 'gradient']
-    const currentIndex = themes.indexOf(currentTheme)
-    const nextIndex = (currentIndex + 1) % themes.length
-    changeTheme(themes[nextIndex])
+    const newDarkMode = !darkMode
+    setDarkMode(newDarkMode)
+    
+    // Update localStorage
+    localStorage.theme = newDarkMode ? 'dark' : 'light'
+    
+    // Update document class
+    updateDocumentClass(newDarkMode)
+  }
+
+  const setTheme = (isDark) => {
+    setDarkMode(isDark)
+    localStorage.theme = isDark ? 'dark' : 'light'
+    updateDocumentClass(isDark)
   }
 
   return {
-    darkMode, // Always true
-    currentTheme,
-    changeTheme,
+    darkMode,
     toggleTheme,
-    theme: 'dark' // Always dark
+    setTheme,
+    theme: darkMode ? 'dark' : 'light'
   }
 }
 
